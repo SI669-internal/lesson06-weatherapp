@@ -1,46 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity} from 'react-native';
 
-export class App1 extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      cities: [
-        { name: "New York", temp: 80, key: 'ny' },
-        { name: "Chicago", temp: 74, key: 'chi' },
-        { name: "Los Angeles", temp: 72, key: 'la' },
-        { name: "Miami", temp: 93, key: 'mia' },
-        { name: "Anchorage", temp: 45, key: 'anc'}
-      ]
-    };
-  }
-  
-
-
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View>
-          <View>
-            <FlatList
-              data={this.state.cities}
-              renderItem={({item}) => 
-                <View>
-                  <Text>{item.name}</Text>
-                  <Text>{item.temp}</Text>
-                </View>
-              }
-              />
-          </View>
-        </View>
-      </SafeAreaView>
-    );
-  }
-}
-
-export default class App3 extends React.Component {
+export default class App extends React.Component {
 
   constructor(props) {
     super(props);
