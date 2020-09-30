@@ -3,7 +3,6 @@
     "name": "Weather",
     "slug": "weatherapp",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android",

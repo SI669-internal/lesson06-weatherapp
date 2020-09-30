@@ -22,15 +22,12 @@ export default class App extends React.Component {
     for (c of tempCities) {
       c.temp = Math.round(Math.random() * 100);
     }
-    this.setState((prevState) => {
-      return {
+    this.setState({
         cities: tempCities 
-      }
     });
   }
 
   render() {
-    console.log('rendering');
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
