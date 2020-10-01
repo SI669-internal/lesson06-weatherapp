@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity} from 'react-native';
 
-export default class App extends React.Component {
 
-  constructor(props) {
-    super(props);
+export  class Step1 extends React.Component {
+  constructor() {
+    super();
 
     this.state = {
       cities: [
@@ -16,49 +16,126 @@ export default class App extends React.Component {
       ]
     };
   }
-  
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View>
+          <FlatList
+            data={this.state.cities}
+            renderItem={({item}) => 
+              <View>
+                <Text>{item.name}</Text>
+                <Text>{item.temp}</Text>
+              </View>
+            }
+            />
+        </View>
+      </View>
+    );
+  }
+}
+
+export class Step2 extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      cities: [
+        { name: "New York", temp: 80, key: 'ny' },
+        { name: "Chicago", temp: 74, key: 'chi' },
+        { name: "Los Angeles", temp: 72, key: 'la' },
+        { name: "Miami", temp: 93, key: 'mia' },
+        { name: "Anchorage", temp: 45, key: 'anc'}
+      ]
+    };
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Totally Accurate Weather</Text>
+        </View>
+        <View style={styles.body}>
+          <FlatList
+            data={this.state.cities}
+            renderItem={({item}) => 
+              <View style={styles.cwItem}>
+                <Text style={styles.cwItemText}>{item.name}</Text>
+                <Text style={styles.cwItemText}>{item.temp}</Text>
+              </View>
+            }
+            />
+        </View>
+        <View style={styles.footer}>
+          <TouchableOpacity 
+            style={styles.refresh}>
+            <Text>
+              Check Weather
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+}
+
+export default class Step3 extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      cities: [
+        { name: "New York", temp: 80, key: 'ny' },
+        { name: "Chicago", temp: 74, key: 'chi' },
+        { name: "Los Angeles", temp: 72, key: 'la' },
+        { name: "Miami", temp: 93, key: 'mia' },
+        { name: "Anchorage", temp: 45, key: 'anc'}
+      ]
+    };
+  }
+
   updateWeather = () => {
-    let tempCities = this.state.cities.slice(); // clone the list of cities 
-    for (c of tempCities) {
+    let updatedCities = [];
+    for (let c of this.state.cities) {
       c.temp = Math.round(Math.random() * 100);
+      updatedCities.push(c);
     }
-    this.setState((prevState) => {
-      return {
-        cities: tempCities 
-      }
+    this.setState({
+      cities: updatedCities
     });
   }
 
   render() {
-    console.log('rendering');
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>Totally Accurate Weather</Text>
-          </View>
-          <View style={styles.body}>
-            <FlatList
-              data={this.state.cities}
-              renderItem={({item}) => 
-                <View style={styles.cwItem}>
-                  <Text style={styles.cwItemText}>{item.name}</Text>
-                  <Text style={styles.cwItemText}>{item.temp}</Text>
-                </View>
-              }
-              />
-          </View>
-          <View style={styles.footer}>
-            <TouchableOpacity 
-              onPress={this.updateWeather}
-              style={styles.refresh}>
-              <Text>
-                Check Weather
-              </Text>
-            </TouchableOpacity>
-          </View>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Totally Accurate Weather</Text>
         </View>
-      </SafeAreaView>
+        <View style={styles.body}>
+          <FlatList
+            data={this.state.cities}
+            renderItem={({item}) => 
+              <View style={styles.cwItem}>
+                <Text style={styles.cwItemText}>{item.name}</Text>
+                <Text style={styles.cwItemText}>{item.temp}</Text>
+              </View>
+            }
+            />
+        </View>
+        <View style={styles.footer}>
+          <TouchableOpacity 
+            style={styles.refresh}
+            onPress={this.updateWeather}>
+            <Text>
+              Check Weather
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 }
@@ -66,6 +143,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 40,
     alignItems: 'stretch',
     justifyContent: 'flex-start',
   },
@@ -94,7 +172,8 @@ const styles = StyleSheet.create({
   footer: {
     flex: 0.15,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 40
   },
   refresh: {
     height: 70,
@@ -102,7 +181,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#aaf',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 100,
     color: 'white'
   }
 });
